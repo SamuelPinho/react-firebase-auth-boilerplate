@@ -1,4 +1,4 @@
-import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE } from "../constants";
+import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE } from '../constants';
 
 const loginRequest = () => ({
   type: LOGIN_REQUEST
@@ -20,15 +20,13 @@ export default function login(firebase, email, password) {
 
     firebase
       .doLogin(email, password)
-      .then(() => {
-        firebase.onAuthUserListener(authUser => {
-          localStorage.setItem("authUser", JSON.stringify(authUser));
-          dispatch(loginSuccess(authUser));
-        });
+      .then(authUser => {
+        localStorage.setItem('authUser', JSON.stringify(authUser));
+        dispatch(loginSuccess(authUser));
       })
       .catch(error => {
         console.log(error);
-        localStorage.removeItem("authUser");
+        localStorage.removeItem('authUser');
         dispatch(loginFailure(error));
       });
   };

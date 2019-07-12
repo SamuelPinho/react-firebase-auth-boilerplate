@@ -1,8 +1,8 @@
-import React from "react";
-import { withRouter } from "react-router-dom";
-import { connect } from "react-redux";
-import { compose } from "recompose";
-import { withAuthentication } from ".";
+import React from 'react';
+import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { compose } from 'recompose';
+import { withFirebase } from '../Firebase';
 
 const withAuthorization = (condition = authUser => !!authUser) => Component => {
   class WithAuthorization extends React.Component {
@@ -10,11 +10,11 @@ const withAuthorization = (condition = authUser => !!authUser) => Component => {
       this.listener = this.props.firebase.onAuthUserListener(
         authUser => {
           if (!condition(authUser)) {
-            this.props.history.push("/login");
+            this.props.history.push('/login');
           }
         },
         () => {
-          this.props.history.push("/login");
+          this.props.history.push('/login');
         }
       );
     }
@@ -24,9 +24,7 @@ const withAuthorization = (condition = authUser => !!authUser) => Component => {
     }
 
     render() {
-      return condition(this.props.authUser) ? (
-        <Component {...this.props} />
-      ) : null;
+      return condition(this.props.authUser) ? <Component {...this.props} /> : null;
     }
   }
 
@@ -35,9 +33,9 @@ const withAuthorization = (condition = authUser => !!authUser) => Component => {
   });
 
   return compose(
+    withFirebase,
     withRouter,
-    connect(mapStateToProps),
-    withAuthentication
+    connect(mapStateToProps)
   )(WithAuthorization);
 };
 

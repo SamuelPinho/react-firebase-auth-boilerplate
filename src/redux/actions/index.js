@@ -1,4 +1,5 @@
-import login from "./login";
-import logout from "./logout";
+import login from './login';
+import logout from './logout';
+import setUser from './setUser';
 
-export { login, logout };
+export { login, logout, setUser };

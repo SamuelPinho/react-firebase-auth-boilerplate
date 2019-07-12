@@ -1,4 +1,4 @@
-import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE } from "../constants";
+import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE } from '../constants';
 
 const INITIAL_STATE = {
   isFetching: false
@@ -9,7 +9,7 @@ const login = (state = INITIAL_STATE, action) => {
     case LOGIN_REQUEST:
       return { ...state, isFetching: true };
     case LOGIN_SUCCESS:
-      return { ...state, isFetching: false };
+      return { ...state, isFetching: false, authUser: action.authUser };
     case LOGIN_FAILURE:
       return { ...state, isFetching: false, error: action.error };
     default:
