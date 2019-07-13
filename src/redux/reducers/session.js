@@ -1,4 +1,4 @@
-import { LOGIN_SUCCESS, LOGOUT_SUCCESS } from '../constants';
+import { LOGIN_SUCCESS, LOGOUT_SUCCESS, REGISTER_SUCCESS } from '../constants';
 
 const INITIAL_STATE = {
   authUser: null
@@ -6,6 +6,7 @@ const INITIAL_STATE = {
 
 function session(state = INITIAL_STATE, action) {
   switch (action.type) {
+    case REGISTER_SUCCESS:
     case LOGIN_SUCCESS: {
       return {
         ...state,
@@ -15,7 +16,7 @@ function session(state = INITIAL_STATE, action) {
     case LOGOUT_SUCCESS: {
       return {
         ...state,
-        authUser: action.authUser
+        authUser: null
       };
     }
     default:

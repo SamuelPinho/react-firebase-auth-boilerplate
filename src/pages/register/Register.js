@@ -1,14 +1,22 @@
-import React, { Component, Fragment } from "react";
+import React, { Component, Fragment } from 'react';
+import { compose } from 'recompose';
+import { connect } from 'react-redux';
+import { withFirebase } from '../../services/Firebase';
+import { register } from '../../redux/actions';
 
 const INITIAL_STATE = {
-  email: "",
-  username: "",
-  password: "",
+  email: '',
+  username: '',
+  password: '',
   error: null
 };
 
 class Register extends Component {
   state = { ...INITIAL_STATE };
+
+  componentWillReceiveProps() {
+    this.props.history.push('/auth');
+  }
 
   handleChange = event => {
     this.setState({
@@ -18,6 +26,11 @@ class Register extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
+
+    const { email, username, password } = this.state;
+
+    this.props.register(this.props.firebase, email, username, password);
+    this.setState({ ...INITIAL_STATE });
   };
 
   render() {
@@ -35,11 +48,7 @@ class Register extends Component {
           </div>
           <div>
             <label>Password</label>
-            <input
-              type="password"
-              name="password"
-              onChange={this.handleChange}
-            />
+            <input type="password" name="password" onChange={this.handleChange} />
           </div>
           <button type="submit">Register</button>
         </form>
@@ -48,4 +57,16 @@ class Register extends Component {
   }
 }
 
-export default Register;
+const mapStateToProps = ({ session }) => ({
+  authUser: session.authUser
+});
+
+const mapDispatchToProps = { register };
+
+export default compose(
+  withFirebase,
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )
+)(Register);
