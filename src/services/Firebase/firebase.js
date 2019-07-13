@@ -3,12 +3,12 @@ import 'firebase/auth';
 import 'firebase/firestore';
 
 const config = {
-  apiKey: 'AIzaSyAXVPo-dweeRPEvzr_TprJojJNqgVmdjmQ',
-  authDomain: 'sound-manager-8dca3.firebaseapp.com',
-  databaseURL: 'https://sound-manager-8dca3.firebaseio.com',
-  projectId: 'sound-manager-8dca3',
-  storageBucket: 'sound-manager-8dca3.appspot.com',
-  messagingSenderId: '388966258360'
+  apiKey: '',
+  authDomain: '',
+  databaseURL: '',
+  projectId: '',
+  storageBucket: '',
+  messagingSenderId: ''
 };
 
 class Firebase {
