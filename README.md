@@ -1,44 +1,67 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# React - Firebase Auth Template
 
-## Available Scripts
+This is a newer version of old **react firebase authentication boilerplate**.
 
-In the project directory, you can run:
+This newer version uses the not so new **Context API** from react to handle user data and **firebase**
+We're also using **Typerscript**!!
 
-### `yarn start`
+> To execute this template with firebase features you need to have an web app registered inside Google Firebase.
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Getting Started
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+1. To start this app, first thing you need to clone it to your work place.
+2. Now you should run the command `npm install` or `yarn` to install all the packages listed on `package.json`.
+3. You should get your firebase configuration keys in order to connect to your firebase console and **we recommend** to add them to an `.env` file with this structure:
 
-### `yarn test`
+```
+REACT_APP_API_KEY=
+REACT_APP_AUTH_DOMAIN=
+REACT_APP_DATABASE_URL=
+REACT_APP_PROJECT_ID=
+REACT_APP_STORAGE_BUCKET=
+REACT_APP_MESSAGING_SENDER_ID=
+REACT_APP_APP_ID=
+REACT_APP_MEASUREMENT_ID=
+```
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+4. After that, all you need to do is to run the project with `yarn start`
 
-### `yarn build`
+## Folder Structure and Project Configurations
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### `/pages`
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+This folder contains the pages of the project
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- Home
+- Login
+- Regsiter
 
-### `yarn eject`
+### `/context`
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Where we define the **contexts APIs** responsible for handling **login**, **register** and **logout** functions. We also handle the authentication helpers like:
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- getting the user from firebase
+- seeing if the user is logged
+- if it's authenticating (fetching firebase for the user)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+We also defined an context for firebase, since we find that it helps to separate the logic between firebase configuration and the businness itself.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+> to access the contexts you can use `useFirebase` and `useAuthentication` we saw that on [Kent C. Dodds blog](https://kentcdodds.com/blog/how-to-use-react-context-effectively) and found it very clever. Thanks Kent ;)
 
-## Learn More
+### `rootProviders`
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Inside this file is where we pass the "global" providers of our App. Since authentication, firebase and routing(BrowserRouter) can be used in the entire application, we thought would be better to define them in a separated file.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Main Features
+
+- Firebase Authentication
+- React Router to handle routing
+
+### Packages Utilized
+
+- firebase
+- react-router-dom
+
+## License
+
+MIT © [Samuel Monteiro](https://samuelmonteiro.netlify.com/)
